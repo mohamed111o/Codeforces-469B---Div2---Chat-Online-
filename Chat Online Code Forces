@@ -1,0 +1,79 @@
+#include<iostream>
+#include <algorithm>
+#include <utility> // f
+#include<string>
+#include<fstream>
+#include<cmath>
+#include<vector>
+#include<map>
+using namespace std;
+class  ChatOnline {
+	int p, q, l, r; int Count = 0;
+	vector<pair<int, int>>a;
+	vector<pair<int, int>>c;
+
+public:
+	bool comparing(int a, int b,int  c,int  d){
+		return max(a, c) <= min(b, d);
+  }
+
+	//Read l r q p 
+	void Read() {
+		cin >> p >> q >> l >> r;
+		a.resize(p);
+		c.resize(q);
+	}
+
+	//read a b c d
+	void Readv() {
+		for (int i = 0; i < p; i++) {
+			
+			cin >> a[i].first >> a[i].second;
+		}
+		for (int i = 0; i < q; i++) {
+			cin >> c[i].first >> c[i].second;
+		}
+	}
+
+	// Count 
+	void Countt() {
+		for (int t = l; t <= r; t++) {
+			bool found = false;
+
+
+			for (auto& x : c) {
+				int start = x.first + t;
+				int end = x.second + t;
+
+
+
+				for (auto& z : a) {
+					if (comparing(z.first, z.second, start, end)) {
+						found = true; 
+						break;
+					}
+				}
+				if (found)break;
+			}
+
+			if (found)Count++;
+
+		}
+
+		cout << Count;
+	}
+	
+};
+
+void Print() {
+	ChatOnline C;
+	C.Read();
+	C.Readv();
+	C.Countt();
+} 
+
+int main()
+{
+	Print(); // call the Class in Function
+	return 0;
+}
